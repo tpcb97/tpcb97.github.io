@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>양주성 — Producer / Music Director</title>
 <link rel="icon" type="image/x-icon" href="images/site/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="images/site/favicon-32.png">
@@ -33,12 +33,28 @@
     --rec-muted:#B5534B;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{
+    scroll-behavior:smooth;
+    overflow-x:hidden;
+    max-width:100%;
+    width:100%;
+    touch-action:pan-y;
+  }
   body{
     background:var(--bg);
     color:var(--fg);
     font-family:'Futura','Jost','Pretendard',sans-serif;
     font-weight:300;
+    overflow-x:hidden;
+    max-width:100%;
+    width:100%;
+    position:relative;
+    touch-action:pan-y;
+    -webkit-text-size-adjust:100%;
+  }
+  #view-main, #view-detail{
+    width:100%;
+    max-width:100%;
     overflow-x:hidden;
   }
   .mono{font-family:'Futura','Jost','Pretendard',sans-serif;}
@@ -50,6 +66,8 @@
     white-space:nowrap;
     padding:11px 0;
     position:relative;
+    width:100%;
+    max-width:100%;
   }
   .marquee::after{
     content:"";
@@ -74,6 +92,10 @@
     display:block;
     position:relative;
     top:3px;
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    user-select:none;
+    pointer-events:none;
   }
   @keyframes scroll{
     0%{transform:translateX(0);}
@@ -86,8 +108,19 @@
     padding:14px 5vw 6px;
     border-bottom:1px solid var(--line);
   }
-  .nav-name{font-size:14px;letter-spacing:0.05em;display:flex;align-items:center;}
-  .nav-name img{height:48px;width:auto;display:block;}
+  .nav-name{
+    font-size:14px;letter-spacing:0.05em;display:flex;align-items:center;
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    user-select:none;
+  }
+  .nav-name img{
+    height:48px;width:auto;display:block;
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    user-select:none;
+    pointer-events:none;
+  }
   .nav-links{display:flex;gap:32px;font-family:'Futura','Jost','Pretendard',sans-serif;font-size:12px;letter-spacing:0.05em;}
   .nav-links a{color:var(--fg);text-decoration:none;opacity:0.7;transition:opacity 0.2s;}
   .nav-links a:hover{opacity:1;}
@@ -287,7 +320,7 @@
     color:var(--muted);font-size:11px;letter-spacing:0.1em;
     min-width:96px;flex-shrink:0;
   }
-  .contact-links a .value{color:var(--fg);}
+  .contact-links a .value{color:var(--fg);word-break:break-all;min-width:0;}
   .contact-links a:hover .value{color:var(--rec-muted);}
   footer{
     padding:24px 5vw;
@@ -300,8 +333,33 @@
     nav{padding:20px 6vw;}
     .nav-links{gap:16px;font-size:10px;}
     .nav-name img{height:36px;}
-    .track-row{grid-template-columns:32px 1fr auto;}
+    .category-header{
+      flex-wrap:wrap;
+      gap:8px 16px;
+    }
+    .category-header h3{
+      min-width:0;
+    }
+    .category-header .meta{
+      width:100%;
+      justify-content:space-between;
+      margin-top:4px;
+    }
+    .track-row{
+      grid-template-columns:32px minmax(0, 1fr) auto;
+    }
+    .track-row .title{
+      min-width:0;
+      word-break:keep-all;
+      overflow-wrap:break-word;
+    }
     .track-row .meta{grid-column:2;}
+    .contact-links a{
+      gap:16px;
+    }
+    .contact-links a .label{
+      min-width:80px;
+    }
   }
 
   /* ==== DETAIL VIEW (project pages, rendered via JS router) ==== */
